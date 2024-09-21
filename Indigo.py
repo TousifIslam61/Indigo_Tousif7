@@ -4,6 +4,10 @@ import speech_recognition as sr
 import os
 import time
 import requests
+import string
+import random
+from datetime import datetime
+
 
 recognizer = sr.Recognizer()   
 engine = pyttsx3.init()
@@ -39,8 +43,24 @@ def listen_command():
         except sr.RequestError:
             print("Sorry, there was a problem with the speech recognition service.")
             return None
+def greet_time():
+    current_hour=datetime.now().hour
+    if 0<=current_hour<12:
+        speak("good morning boss....what can I do for you?")
+    elif current_hour>12 and current_hour<=14:
+        speak("good afternoon boss....what can I do for you?")
+    elif current_hour>15 and current_hour<=18:
+        speak("good evening boss....what can I do for you?")
+    elif current_hour>18:
+        speak("good Night boss....what can I do for you?")
         
-speak("initializing indigo.....")
+
+       
+speak("initializing indigo.....69% completed")
+time.sleep(3)
+speak("initialization sucessful....")
+time.sleep(1.5)
+greet_time()
 command=listen_command()    
 
 if "open google" in command:
@@ -93,6 +113,7 @@ elif "weather information" in command:
     speak("enter your city name")
     city=input("enter your city name")
     
+    
     url=f"https://wttr.in/{city}?format%t%20%w"
 
     def get_weather(city):
@@ -104,6 +125,48 @@ elif "weather information" in command:
             print("I couldn't find")
 
     get_weather(city)
+elif "generate password" in command:
+
+    s1=list(string.ascii_uppercase)
+    s2=list(string.ascii_lowercase)
+    
+    speak("Enter the lenght of the password")
+    user_input=input("Enter the lenght of the password:")
+
+    while True:
+        char=int(user_input)
+        try:
+            if char<8:
+                speak("The lenght of the password is small...try another")
+                print("The lenght of the password is small…try another")
+                speak("Enter another lenght of password")
+                user_input=input("Enter another lenght of the password")
+            else:
+                break
+            
+        except:
+            speak("only integers allowed..")
+            print("only integers allowed..")
+            speak("Enter another lenght of password")
+            user_input=input("Enter another lenght of the password")
+    random.shuffle(s1)
+    random.shuffle(s2)
+
+    p1=round(char*(69/100))
+    p2=round(char*(41/100))
+
+    result=[]
+
+    for x in range(p1):
+        result.append(s1[x])
+    for x in range(p2):
+        result.append(s2[x])
+
+    random.shuffle(result)
+
+    password="".join(result)
+    speak(f"Your password is:{password}")
+    print(f"Your password is:{password}")
 else:
     speak("I didn't understand that. Searching the web for you...")
     search_query = command
