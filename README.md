@@ -1,10 +1,11 @@
 this is an ai that is inspired from jarvis from iron man...........
 this code helps u to:
-open sites
-leads the unknown to Google search
-set alarm
-get weather information 
-get to know about current date and time
+•open sites
+•leads the unknown to Google search
+•set alarm
+•get weather information 
+•get to know about current date and time
+°create a combination of letters for            password...
 
 
 
