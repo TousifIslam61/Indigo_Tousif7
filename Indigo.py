@@ -7,6 +7,7 @@ import requests
 import string
 import random
 from datetime import datetime
+from tqdm import tqdm
 
 
 recognizer = sr.Recognizer()   
@@ -56,8 +57,13 @@ def greet_time():
         
 
        
-speak("initializing indigo.....69% completed")
-time.sleep(3)
+speak("initializing indigo...")
+
+total=100
+print("   initializing...")
+for i in tqdm(range(total)):
+	time.sleep(0.05)
+
 speak("initialization sucessful....")
 time.sleep(1.5)
 greet_time()
