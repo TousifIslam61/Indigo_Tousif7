@@ -8,12 +8,14 @@ import string
 import random
 from datetime import datetime
 from tqdm import tqdm
-
-
+import tkinter as tk
+import math
+import subprocess
+import sys
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 
-# URLs for quick access
+
 urls = {
     "google": "https://www.google.com/",
     "youtube": "https://www.youtube.com/",
@@ -52,28 +54,31 @@ def listen_command():
 def greet_time():
     current_hour = datetime.now().hour
     if 0 <= current_hour < 12:
-        speak("Good morning, boss. What can I do for you?")
+        speak("Good morning boss. What can I do for you?")
     elif 12 <= current_hour <= 14:
-        speak("Good afternoon, boss. What can I do for you?")
+        speak("Good afternoon boss. What can I do for you?")
     elif 15 <= current_hour <= 18:
-        speak("Good evening, boss. What can I do for you?")
+        speak("Good evening boss. What can I do for you?")
     else:
-        speak("Good night, boss. What can I do for you?")
+        speak("Good night boss. What can I do for you?")
 
 
-speak("Initializing Indigo...")
+speak("Initializing Jarvis...")
 
 
 total = 100
 print("   Initializing...")
 for i in tqdm(range(total)):
     time.sleep(0.05)
-
 speak("Initialization successful...")
-time.sleep(1.5)
+
+# Start the circle animation script
+subprocess.Popen(['python', 'C:\MS one\Desktop\python projects\Jarvis_AI\circle.py'])
+
+time.sleep(0.9)
 greet_time()
 
-command = listen_command()
+command = listen_command() 
 
 if command is not None:
     if "open google" in command:
@@ -171,4 +176,5 @@ if command is not None:
         webbrowser.open(search_url)
 else:
     speak("I didn't catch any command. Please try again.")
-
+    listen_command()
+    sys.exit()
